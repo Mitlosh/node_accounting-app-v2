@@ -41,19 +41,18 @@ const createUser = (req, res) => {
 
 // Update user
 const updateUser = (req, res) => {
-  const { id } = req.params;
+  const uid = parseInt(req.params.id);
   const { name } = req.body;
-  const uid = Number(id);
 
-  if (typeof name !== 'string') {
-    return res.status(400).send({ message: 'Name is required' });
+  if (typeof name !== 'string' || name.trim() === '') {
+    return res.status(400).send('Name is required');
   }
 
-  if (userService.getUser(uid) === null) {
-    return res.status(404).send({ message: 'Not found' });
+  if (!userService.getUser(uid)) {
+    return res.status(404).send('Not found');
   }
 
-  const updatedUser = userService.updateUsers({ uid, name });
+  const updatedUser = userService.updateUsers({ id: uid, name });
 
   res.status(200).send(updatedUser);
 };
