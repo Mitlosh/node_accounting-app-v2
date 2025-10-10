@@ -9,7 +9,7 @@ const getAllUsers = (req, res) => {
 const getUserById = (req, res) => {
   const { id } = req.params;
 
-  if (typeof +id !== 'number') {
+  if (Number.isNaN(Number(id))) {
     res.status(400).send('Write correct data');
 
     return;

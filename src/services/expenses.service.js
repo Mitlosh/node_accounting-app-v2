@@ -1,19 +1,19 @@
 let expenses = [];
 
 const getId = () =>
-  expenses.length > 0 ? Math.max(...expenses.map((u) => u.id)) + 1 : 1;
+  expenses.length > 0 ? Math.max(...expenses.map((u) => Number(u.id))) + 1 : 1;
 
 const getAllExpenses = () => {
-  return expenses;
+  return [...expenses];
 };
 
 const createExpenses = ({ userId, spentAt, title, amount, category, note }) => {
   const expense = {
     id: getId(),
-    userId,
+    userId: Number(userId),
     spentAt,
     title,
-    amount,
+    amount: Number(amount),
     category,
     note,
   };
@@ -24,11 +24,11 @@ const createExpenses = ({ userId, spentAt, title, amount, category, note }) => {
 };
 
 const getExpense = (id) => {
-  return expenses.find((expense) => expense.id === +id) || null;
+  return expenses.find((expense) => expense.id === Number(id)) || null;
 };
 
 const deleteExpenses = (id) => {
-  expenses = expenses.filter((expense) => expense.id !== id);
+  expenses = expenses.filter((expense) => expense.id !== Number(id));
 };
 
 const updateExpenses = (id, body) => {

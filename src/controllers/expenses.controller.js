@@ -33,7 +33,7 @@ const getAll = (req, res) => {
 const getExpense = (req, res) => {
   const { id } = req.params;
 
-  if (typeof +id !== 'number') {
+  if (Number.isNaN(Number(id))) {
     res.status(400).send('Write correct data');
 
     return;
@@ -96,7 +96,7 @@ const updateExpense = (req, res) => {
 const deleteExpense = (req, res) => {
   const { id } = req.params;
 
-  if (!expensesService.getExpense(+id)) {
+  if (!expensesService.getExpense(+id) || Number.isNaN(+id)) {
     return res.status(404).send({ message: 'Expense not found' });
   }
 
