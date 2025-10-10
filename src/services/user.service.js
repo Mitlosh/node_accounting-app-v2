@@ -4,7 +4,7 @@ const getId = () =>
   users.length > 0 ? Math.max(...users.map((u) => u.id)) + 1 : 1;
 
 const getAllUsers = () => {
-  return users;
+  return [...users];
 };
 
 const createUser = (name) => {
